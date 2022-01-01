@@ -1,0 +1,10 @@
+---
+- hosts: routers
+  become: yes
+  gather_facts: no
+
+  tasks:
+    - name: Delete loopback 0
+      cisco.ios.ios_config:
+        lines: no interface {{ item.int_name }}
+      with_items: "{{ interfaces.Loopback }}"

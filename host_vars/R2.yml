@@ -1,0 +1,10 @@
+---
+interfaces:
+    Loopback:
+    - int_name: Loopback0
+      int_addr: 10.0.0.2
+      description: Loopback for Router-id
+    Data:
+    - int_name: Ethernet1/0
+      int_addr: 172.16.12.2
+      description: Connected to R1

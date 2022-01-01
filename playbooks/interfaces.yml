@@ -1,0 +1,22 @@
+---
+- hosts: routers
+  become: yes
+  gather_facts: no
+
+  tasks:
+    - name: Create Interface
+      cisco.ios.ios_interfaces:
+        config:
+          - name: "{{ item.int_name }}"
+            description: "{{ item.description }}"
+            enabled: true
+      with_items: "{{ interfaces.Data }}"
+        
+
+    - name: Configure IP address
+      cisco.ios.ios_l3_interfaces:
+        config:
+          - name: "{{ item.int_name }}"
+            ipv4:
+            - address: "{{ item.int_addr }}/24"
+      with_items: "{{ interfaces.Data }}"

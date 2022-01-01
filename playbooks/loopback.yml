@@ -1,0 +1,21 @@
+---
+- hosts: routers
+  become: yes
+  gather_facts: no
+
+  tasks:
+    - name: Create Loopback interfaces
+      cisco.ios.ios_interfaces:
+        config:
+          - name: "{{ item.int_name }}"
+            description: "{{ item.description }}"
+            enabled: true
+      with_items: "{{ interfaces.Loopback }}"
+        
+    - name: Configure Loopback IP address
+      cisco.ios.ios_l3_interfaces:
+        config:
+          - name: "{{ item.int_name }}"
+            ipv4:
+            - address: "{{ item.int_addr }}/32"
+      with_items: "{{ interfaces.Loopback }}"

@@ -1,0 +1,11 @@
+---
+- name: Create all interfaces
+  hosts: routers
+  gather_facts: false
+
+- import_playbook: interfaces.yml
+- import_playbook: loopback.yml
+
+
+- import_playbook: delete_loopback.yml
+- import_playbook: delete_interfaces.yml 

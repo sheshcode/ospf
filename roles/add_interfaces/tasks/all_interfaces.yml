@@ -1,0 +1,5 @@
+---
+- name: Create all interfaces
+  - include: 
+    - interfaces.yml
+    - loopback.yml

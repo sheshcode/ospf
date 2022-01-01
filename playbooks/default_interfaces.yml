@@ -1,0 +1,12 @@
+---
+- hosts: routers
+  become: yes
+  gather_facts: no
+
+  tasks:
+    - name: Delete loopback 0
+      cisco.ios.ios_interfaces:
+        config:
+          - name: "{{ item.int_name }}"
+        state: deleted #does not shutdown the interfaces
+      with_items: "{{ interfaces.Data }}"
